@@ -25,7 +25,7 @@ const userSchema = new Schema({
   occupation: String,
   avatar: String,
   rentals: Object, // ref to the rental model,
-  dateJoined: Date.now,
+  dateJoined: Date,
   secretQuestion: String,
   secretAnswer: String,
   state: String,
