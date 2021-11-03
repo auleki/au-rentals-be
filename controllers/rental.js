@@ -1,11 +1,14 @@
 const Rental = require("../models/rental")
 
+exports.approveRental = async(req, res) => {
+  res.send("Rental has been approved")
+}
+
 exports.rentCar = async (req, res) => {
   res.send("Car rental initiated")
 }
 
 exports.fetchRental = async(req, res) => {
-  console.log(req.params.rentalId)
   res.send("Fetching rental")
 }
 

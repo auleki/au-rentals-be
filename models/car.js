@@ -1,26 +1,24 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose
-/*
-colors = [
-  {
-    colorName: 'Blue',
-    picture: 'url string'
-  },
-  {
-    colorName: 'Red',
-    picture: 'url string'
-  }
-]
-*/
+
 const carSchema = new Schema({
   brand: String,
-  transmissionAutomatic: Boolean,
+  transmissionAutomatic: {
+    type: String,
+    enum: ['manual', 'automatic']
+  },
   year: Number,
   model: String,
-  colors: Array,
+  colors: [Object],
   pricePerDay: Number,
-  renters: Object, // ref to user model
-  dateUploaded: Date.now
+  renters: {
+    type: Schema.Types.ObjectId,
+    ref: "User"
+  }, // ref to user model
+  dateUploaded: {
+    type: Date,
+    default: Date.now
+  },
 })
 
 const Car = mongoose.model('Car', carSchema)

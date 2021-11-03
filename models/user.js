@@ -24,13 +24,20 @@ const userSchema = new Schema({
   age: Number,
   occupation: String,
   avatar: String,
-  rentals: Object, // ref to the rental model,
-  dateJoined: Date,
+  rentals: {
+    type: Schema.Types.ObjectId,
+    ref: "Rental"
+  }, // ref to the rental model,
+  dateJoined: {
+    type: Date,
+    default: Date.now
+  },
   secretQuestion: String,
   secretAnswer: String,
   state: String,
   city: String,
-  address: String
+  address: String,
+  // restrict users outside Nigeria from having access
 })
 
 const User = mongoose.model("User", userSchema)

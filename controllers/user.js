@@ -11,3 +11,7 @@ exports.loginUser = async (req, res) => {
 exports.registerUser = async (req, res) => {
   res.send("Registering user")
 }
+
+exports.resetPassword = async(req, res) => {
+  res.send("Password has been reset")
+}

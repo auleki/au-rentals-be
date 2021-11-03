@@ -23,7 +23,10 @@ const rentalSchema = new Schema({
       'returned'
     ]
   }, // or we use string
-  dateRented: Date,
+  dateRented: {
+    type: Date,
+    default: Date.now
+  },
 })
 
 const Rental = mongoose.model("Rental", rentalSchema)
