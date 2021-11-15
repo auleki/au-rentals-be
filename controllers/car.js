@@ -5,7 +5,9 @@ exports.allCars = async(req, res) => {
 }
 
 exports.uploadCar = async(req, res) => {
-  res.send("Uploading Car...")
+  const newCar = new Car(req.body)
+  const savedCar = await newCar.save()
+  res.send(savedCar)
 }
 
 exports.editCar = async(req, res) => {

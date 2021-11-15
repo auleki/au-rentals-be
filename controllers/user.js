@@ -15,3 +15,18 @@ exports.registerUser = async (req, res) => {
 exports.resetPassword = async(req, res) => {
   res.send("Password has been reset")
 }
+
+exports.createUser = async(req, res) => {
+  try {
+    const newUser = new User(req.body)
+    const savedUser = await newUser.save()
+    res.send(savedUser)
+  } catch (error) {
+    res.send(error)
+  }
+  
+}
+
+exports.editUser = async(req, res) => {
+  res.send("Editing user...")
+}
