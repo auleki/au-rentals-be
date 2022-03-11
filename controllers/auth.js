@@ -1,5 +1,6 @@
 const User = require("../models/user")
 const bcrypt = require('bcrypt')
+const { generateAccessToken } = require("../helpers/jwt")
 const saltRounds = 10
 
 exports.loginUser = async (req, res) => {
@@ -14,8 +15,8 @@ exports.loginUser = async (req, res) => {
     try {
       const { username, password } = req.body
       const foundUser = await User.findOne({ username })
-      console.log(foundUser)
-      res.status(200).send({ msg: "Logging in user..." })
+      const token = generateAccessToken({ username: foundUser.username, firstName: foundUser.firstName })
+      res.status(200).send({ msg: "Logging in user...", accessToken: token })
     } catch (error) {
       res.sendStatus(400, error)
     }
