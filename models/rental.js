@@ -26,8 +26,7 @@ const rentalSchema = new Schema({
     enum: ["rent-in-progress", "rented", "canceled", "return-in", "returned"],
     required: true,
   },
-  opts,
-});
+}, { opts });
 
 const Rental = mongoose.model("Rental", rentalSchema);
 module.exports = Rental;

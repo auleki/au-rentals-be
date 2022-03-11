@@ -3,17 +3,22 @@ const { Schema } = mongoose;
 
 const opts = {
   timestamps: {
-    createdAt: "userCreatedOn",
+    createdAt: "useCreatedOn",
     updatedAt: "userUpdatedOn",
   },
 };
 
-const userSchema = new Schema({
+const userSchema = new Schema(
+    {
   username: {
     type: String,
     required: true,
     lowercase: true,
     trim: true,
+  },
+  roles: {
+    type: Array,
+    required: true
   },
   firstName: {
     type: String,
@@ -35,14 +40,15 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Rental",
   }, // ref to the rental model,
-  opts,
   secretQuestion: String,
   secretAnswer: String,
   state: String,
   city: String,
   address: String,
   // restrict users outside Nigeria from having access
-});
+}, 
+{ opts }
+);
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;

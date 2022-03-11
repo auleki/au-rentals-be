@@ -1,30 +1,16 @@
 const User = require("../models/user")
+const bcrypt = require('bcrypt')
 
 exports.fetchUsers = async (req, res) => {
   res.send("Fetched Users")
 }
 
-exports.loginUser = async (req, res) => {
-  res.send("Logging in user")
-}
-
-exports.registerUser = async (req, res) => {
-  res.send("Registering user")
+exports.fetchUser = async (req, res) => {
+  res.send("Fetched user of ID: " + req.params.id)
 }
 
 exports.resetPassword = async(req, res) => {
-  res.send("Password has been reset")
-}
-
-exports.createUser = async(req, res) => {
-  try {
-    const newUser = new User(req.body)
-    const savedUser = await newUser.save()
-    res.send(savedUser)
-  } catch (error) {
-    res.send(error)
-  }
-  
+  res.sendStatus(200, "Password is being reset...")
 }
 
 exports.editUser = async(req, res) => {

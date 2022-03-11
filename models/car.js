@@ -35,8 +35,7 @@ const carSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   }, // ref to user model
-  opts,
-});
+}, { opts });
 
 const Car = mongoose.model("Car", carSchema);
 module.exports = Car;
