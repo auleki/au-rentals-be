@@ -1,7 +1,7 @@
 const User = require("../models/user")
 const bcrypt = require('bcrypt')
 const { generateAccessToken } = require("../helpers/jwt")
-const saltRounds = 10
+
 
 exports.loginUser = async (req, res) => {
   /* 
@@ -15,14 +15,20 @@ exports.loginUser = async (req, res) => {
     try {
       const { username, password } = req.body
       const foundUser = await User.findOne({ username })
-      const token = generateAccessToken({ username: foundUser.username, firstName: foundUser.firstName })
-      res.status(200).send({ msg: "Logging in user...", accessToken: token })
+      const passwordMatch = await bcrypt.compare(password, foundUser.password)
+      if (passwordMatch) {
+        const token = generateAccessToken({ username: foundUser.username, firstName: foundUser.firstName })
+        res.status(200).send({ msg: "Logging in user...", accessToken: token })
+      } else {
+        res.status(400).send("username or password incorrect, try again")
+      }
     } catch (error) {
-      res.sendStatus(400, error)
+      res.status(400).send(error)
     }
 }
 
 exports.registerUser = async(req, res) => {
+    const saltRounds = 10
     const { body } = req
     bcrypt.hash(req.body.password, saltRounds, async function(err, hash) {
       if (!err) {
@@ -32,9 +38,7 @@ exports.registerUser = async(req, res) => {
           username: body.username, 
           roles: body.roles,
           password: hash  
-        }
-        console.log("2", userObj)
-        
+        }        
         try {
           const newUser = new User(userObj)
           const savedUser = await newUser.save()
