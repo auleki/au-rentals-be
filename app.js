@@ -17,11 +17,13 @@ const authRoutes = require("./routes/auth")
 const userRoutes = require("./routes/user")
 const rentalRoutes = require("./routes/rental")
 const carRoutes = require("./routes/car")
+const reviewRoutes = require("./routes/review")
 
 app.use("/", authRoutes)
 app.use("/users", userRoutes)
 app.use("/rental", rentalRoutes)
 app.use("/car", carRoutes)
+app.use("/review", reviewRoutes)
 
 /* ADD ERROR HANDLING MIDDLEWARE*/ 
 

@@ -9,6 +9,12 @@ exports.addReview = async (req, res) => {
   */
 }
 
+exports.getReviews = async(req, res) => {
+  /* 
+    1. based on a car, fetch all reviews for that car
+  */
+}
+
 exports.deleteReview = async (req, res) => {
   const reviewObj = req.body
 
