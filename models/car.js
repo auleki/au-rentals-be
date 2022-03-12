@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const opts = {
-  timestams: {
+  timestamps: {
     createdAt: "carUploadedOn",
     updatedAt: "cardUpdatedOn",
   },
@@ -35,6 +35,11 @@ const carSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   }, // ref to user model
+  review: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: "Review"
+  }
 }, { opts });
 
 const Car = mongoose.model("Car", carSchema);
